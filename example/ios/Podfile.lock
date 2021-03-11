@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - screen_shot_listen_plugin (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - screen_shot_listen_plugin (from `.symlinks/plugins/screen_shot_listen_plugin/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  screen_shot_listen_plugin:
+    :path: ".symlinks/plugins/screen_shot_listen_plugin/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  screen_shot_listen_plugin: 35d3af4a4769fce05b8cde365c8d29affe28d15c
+
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+
+COCOAPODS: 1.9.2
