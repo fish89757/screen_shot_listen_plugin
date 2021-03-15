@@ -27,7 +27,7 @@
 //                                                     selector:@selector(userDidTakeScreenshot:)
 //            name:UIApplicationUserDidTakeScreenshotNotification object:nil];
       result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-    } else if ([@"starListen" isEqualToString:call.method]) {
+    } else if ([@"startListen" isEqualToString:call.method]) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(userDidTakeScreenshot:)
             name:UIApplicationUserDidTakeScreenshotNotification object:nil];

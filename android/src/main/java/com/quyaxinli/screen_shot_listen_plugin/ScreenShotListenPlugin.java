@@ -19,7 +19,7 @@ import io.flutter.plugin.common.BinaryMessenger;
 public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,ActivityAware {
 
 
-    public static final String STAR_LISTEN = "starListen";
+    public static final String STAR_LISTEN = "startListen";
     public static final String STOP_LISTEN = "stopListen";
     public static final String CECE_SCREEN_SHOT_LISTEN_EVENT_CHANNEL = "cece_screen_shot_listen_event_channel";
     public static EventChannel.EventSink screenShotEvent;
