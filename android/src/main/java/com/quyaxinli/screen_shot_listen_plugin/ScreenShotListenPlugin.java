@@ -19,7 +19,7 @@ import io.flutter.plugin.common.BinaryMessenger;
 public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,ActivityAware {
 
 
-    public static final String STAR_LISTEN = "startListen";
+    public static final String START_LISTEN = "startListen";
     public static final String STOP_LISTEN = "stopListen";
     public static final String CECE_SCREEN_SHOT_LISTEN_EVENT_CHANNEL = "cece_screen_shot_listen_event_channel";
     public static EventChannel.EventSink screenShotEvent;
@@ -58,7 +58,7 @@ public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
-        } else if (call.method.equals(STAR_LISTEN)) {
+        } else if (call.method.equals(START_LISTEN)) {
             screenShotListenManager=ScreenShotListenManager.newInstance(mActivity);
             screenShotListenManager.startListen();
         } else if (call.method.equals(STOP_LISTEN)) {

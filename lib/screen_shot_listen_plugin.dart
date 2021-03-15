@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 class ScreenShotListenPlugin {
   static const String CECE_SCREEN_SHOT_LISTEN_EVENT_CHANNEL =
       "cece_screen_shot_listen_event_channel";
-  static const String STAR_LISTEN = "startListen";
+  static const String START_LISTEN = "startListen";
   static const String STOP_LISTEN = "stopListen";
   static const String PLUGIN_NAME = "screen_shot_listen_plugin";
 
@@ -38,8 +38,7 @@ class ScreenShotListenPlugin {
 
   //开始监听
   startListen() {
-    print("sssccccqqqqqqq");
-    _channel.invokeMethod(STAR_LISTEN);
+    _channel.invokeMethod(START_LISTEN);
   }
 
   //结束监听
