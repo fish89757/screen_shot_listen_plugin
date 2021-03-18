@@ -13,6 +13,8 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.BinaryMessenger;
+import android.util.Log;
+
 /**
  * ScreenShotListenPlugin
  */
@@ -28,7 +30,7 @@ public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel channel;
-    private Activity mActivity;
+    static private Context mContext;
     private ScreenShotListenManager screenShotListenManager;
 
     @Override
@@ -36,7 +38,8 @@ public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,
         channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "screen_shot_listen_plugin");
         channel.setMethodCallHandler(this);
         BinaryMessenger binaryMessenger = flutterPluginBinding.getBinaryMessenger();
-        registerLiveSDKEvent(binaryMessenger);
+        mContext=flutterPluginBinding.getApplicationContext();
+        registerScreenShotEvent(binaryMessenger);
     }
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -51,15 +54,17 @@ public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,
     public static void registerWith(Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "screen_shot_listen_plugin");
         channel.setMethodCallHandler(new ScreenShotListenPlugin());
-        registerLiveSDKEvent(registrar.messenger());
+        registerScreenShotEvent(registrar.messenger());
+        mContext=registrar.context();
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+        Log.d("tag","screen_shot>>>>>>>>>>>>>>onMethodCall");
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         } else if (call.method.equals(START_LISTEN)) {
-            screenShotListenManager=ScreenShotListenManager.newInstance(mActivity);
+            screenShotListenManager=ScreenShotListenManager.newInstance(mContext);
             screenShotListenManager.startListen();
         } else if (call.method.equals(STOP_LISTEN)) {
             if(screenShotListenManager!=null){
@@ -72,7 +77,8 @@ public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,
 
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
-        mActivity = binding.getActivity();
+//        Log.d("tag","screen_shot>>>>>>>>>>>>>>onAttachedToActivity");
+//        mActivity = binding.getActivity();
     }
 
     @Override
@@ -82,12 +88,13 @@ public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,
 
     @Override
     public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
-
+//        Log.d("tag","screen_shot>>>>>>>>>>>>>>onReattachedToActivityForConfigChanges");
+//        mActivity = binding.getActivity();
     }
 
     @Override
     public void onDetachedFromActivity() {
-        mActivity = null;
+        mContext = null;
     }
 
     @Override
@@ -95,7 +102,7 @@ public class ScreenShotListenPlugin implements FlutterPlugin, MethodCallHandler,
         channel.setMethodCallHandler(null);
     }
 
-    private static void registerLiveSDKEvent(BinaryMessenger binaryMessenger) {
+    private static void registerScreenShotEvent(BinaryMessenger binaryMessenger) {
         new EventChannel(binaryMessenger, CECE_SCREEN_SHOT_LISTEN_EVENT_CHANNEL).setStreamHandler(
                 new EventChannel.StreamHandler() {
 

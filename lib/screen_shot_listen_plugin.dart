@@ -38,6 +38,7 @@ class ScreenShotListenPlugin {
 
   //开始监听
   startListen() {
+    print("screen_shot_>>>>>>>>>>>>>>>>>>");
     _channel.invokeMethod(START_LISTEN);
   }
 
