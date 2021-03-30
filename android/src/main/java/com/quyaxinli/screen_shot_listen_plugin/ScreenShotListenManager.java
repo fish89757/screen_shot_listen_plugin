@@ -205,6 +205,11 @@ public class ScreenShotListenManager {
             }
             if (!cursor.moveToFirst()) {
                 Log.d(TAG, "Cursor no data.");
+                if (ScreenShotListenPlugin.screenShotEvent != null) {
+                    Map<String, Object> eventData = new HashMap<>();
+                    eventData.put("code", -1);
+                    ScreenShotListenPlugin.screenShotEvent.success(eventData);
+                }
                 return;
             }
 
@@ -261,9 +266,10 @@ public class ScreenShotListenManager {
             Log.d(TAG, "ScreenShot: path = " + data + "; size = " + width + " * " + height
                     + "; date = " + dateTaken);
             if (!checkCallback(data)) {
-                if(ScreenShotListenPlugin.screenShotEvent!=null){
+                if (ScreenShotListenPlugin.screenShotEvent != null) {
                     Map<String, Object> eventData = new HashMap<>();
-                    eventData.put("path",data );
+                    eventData.put("code", 0);
+                    eventData.put("path", data);
                     ScreenShotListenPlugin.screenShotEvent.success(eventData);
                 }
             }
@@ -365,7 +371,6 @@ public class ScreenShotListenManager {
     }
 
 
-
     private int dp2px(Context ctx, float dp) {
         float scale = ctx.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
@@ -380,6 +385,8 @@ public class ScreenShotListenManager {
 
     public interface OnScreenShotListener {
         void onShot(String imagePath);
+
+        void onGetPathFailed();
     }
 
     private static void assertInMainThread() {
