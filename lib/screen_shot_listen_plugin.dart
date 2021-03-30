@@ -58,4 +58,9 @@ class ScreenShotListenPlugin {
   addScreenShotListener(Function(String path) listener) {
     screenShotListener = listener;
   }
+
+  //设置没有权限的回调对象
+  addNoPermissionListener(Function() listener) {
+    noPermissionListener = listener;
+  }
 }
