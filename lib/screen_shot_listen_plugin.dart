@@ -13,6 +13,7 @@ class ScreenShotListenPlugin {
       const EventChannel(CECE_SCREEN_SHOT_LISTEN_EVENT_CHANNEL);
 
   Function(String path) screenShotListener;
+  Function() noPermissionListener;
 
   // 工厂模式
   factory ScreenShotListenPlugin() => _getInstance();
@@ -23,8 +24,14 @@ class ScreenShotListenPlugin {
   ScreenShotListenPlugin._internal() {
     // 初始化
     _screenShotEventChannel.receiveBroadcastStream().listen((data) {
-      if (screenShotListener != null) {
-        screenShotListener(data['path']);
+      if (data['code'] != null && data['code'] == 0) {
+        if (screenShotListener != null) {
+          screenShotListener(data['path']);
+        }
+      } else if (data['code'] != null && data['code'] == -1) {
+        if (noPermissionListener != null) {
+          noPermissionListener();
+        }
       }
     });
   }
