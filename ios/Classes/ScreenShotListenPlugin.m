@@ -45,7 +45,7 @@
 //    NSData *imageData = [self dataWithScreenshotInPNGFormat];
     if (_eventSink) {
 //        _eventSink(imageData);
-        _eventSink(@{@"path": @"/path"});
+        _eventSink(@{@"path": @"/path", @"code": @0});
     }
 //    NSLog(@"%@", imageData);
     
@@ -100,7 +100,7 @@
 }
 
 
-#pragma mark - OC给flutterc传值 获取deviceToken
+#pragma mark - OC给flutterc传值
 - (FlutterError *)onListenWithArguments:(id)arguments eventSink:(FlutterEventSink)events{
     _eventSink = events;
     return nil;

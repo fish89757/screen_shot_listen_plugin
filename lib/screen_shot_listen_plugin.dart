@@ -24,6 +24,8 @@ class ScreenShotListenPlugin {
   ScreenShotListenPlugin._internal() {
     // 初始化
     _screenShotEventChannel.receiveBroadcastStream().listen((data) {
+      // 如需增加字段需要同步iOS端 userDidTakeScreenshot 方法中 _eventSink传递的字典(Map)
+      // print("接收到的数据data = ${data}");
       if (data['code'] != null && data['code'] == 0) {
         if (screenShotListener != null) {
           screenShotListener(data['path']);
