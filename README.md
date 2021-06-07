@@ -1,15 +1,14 @@
 # screen_shot_listen_plugin
 
-A new Flutter plugin.
+Flutter监听手机截图的插件
 
-## Getting Started
+加入依赖： git: url:https://github.com/fish89757/screen_shot_listen
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+开始监听： ScreenShotListenPlugin.instance.startListen()；
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+添加截屏事件回调,其中path为图片路径（path只在android中有效）： ScreenShotListenPlugin.instance.addScreenShotListener((path){});
+
+添加android截屏时没有权限的回调，可在此回调中申请外部存储权限： ScreenShotListenPlugin.instance.addNoPermissionListener((){});
+
+结束监听： ScreenShotListenPlugin.instance.stopListen()；
 
