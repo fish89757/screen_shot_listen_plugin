@@ -2,7 +2,7 @@
 
 Flutter监听手机截图的插件
 
-加入依赖： git: url:https://github.com/fish89757/screen_shot_listen
+加入依赖： git: url:https://github.com/fish89757/screen_shot_listen_plugin
 
 开始监听： ScreenShotListenPlugin.instance.startListen()；
 
